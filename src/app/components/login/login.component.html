@@ -1,0 +1,39 @@
+<div class="main-container" fxFlex=100 fxLayout="row" fxLayoutAlign="center center" style="margin-top:10%">
+    <div>
+        <img src="../../../assets/UserPagesImage.png" alt="UserPagesImage">
+    </div>
+    <div class="right-container">
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button routerLink="/login" class="login-logout">LOGIN</button>
+                <hr class="activated">
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button routerLink="/signup" class="login-logout" style="margin-bottom: 30%;">SIGNUP</button>
+
+            </div>
+        </div>
+        <div>
+            <form [formGroup]="LoginForm" (ngSubmit)="Login()" fxLayout="column" fxLayoutAlign="space-between stretch">
+                <div class="form-item" fxLayout="column">
+                    <span>Email Id</span>
+                    <input type="text" class="form-input" formControlName="email">
+                </div>
+                <div class="form-item" fxLayout="column">
+                    <span>Password</span>
+                    <input type="text" class="form-input" formControlName="password">
+                </div>
+                <button class="login-button" style="margin-top: 10%;">Login</button>
+                <div class="form-item" fxLayout="row" fxLayoutAlign="space-between center">
+                    <hr style="width: 30%;">
+                    <span>OR</span>
+                    <hr style="width: 30%;">
+                </div>
+                <div class="form-item" fxLayout="row" fxLayoutAlign="space-between center">
+                    <button mat-button style="background-color: #2074f4; color:white">Facebook</button>
+                    <button mat-button>Google</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
