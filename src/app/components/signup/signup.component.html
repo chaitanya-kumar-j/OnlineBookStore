@@ -1,8 +1,8 @@
-<div class="main-container" fxFlex=100 fxLayout="row" fxLayoutAlign="center center" style="margin-top:5%">
+<div class="main-container" fxFlex=100 fxLayout="row" fxLayoutAlign="center center" style="margin-top:10%">
     <div>
         <img src="../../../assets/UserPagesImage.png" alt="UserPagesImage">
     </div>
-    <div class="right-container" fxLayout="column">
+    <div class="right-container">
         <div fxLayout="row" fxLayoutAlign="space-between start">
             <div fxLayout="column" fxLayoutAlign="center center">
                 <button routerLink="/login" class="login-logout">LOGIN</button>
@@ -13,29 +13,35 @@
             </div>
         </div>
         <div>
-            <form [formGroup]="SignupForm" (ngSubmit)="Signup()" fxLayout="column" fxLayoutAlign="center stretch">
-                <label>Full Name</label>
-                <mat-form-field appearance="outline">
-                    <input matInput class="form-input" formControlName="fullName">
-                </mat-form-field>
-                <label>Email Id</label>
-                <mat-form-field appearance="outline">
-                    <input matInput class="form-input" formControlName="email">
-                </mat-form-field>
-                <label>Password</label>
-                <mat-form-field appearance="outline">
-                    <input matInput matInput class="form-input" formControlName="password"
-                        [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <label>Mobile Number</label>
-                <mat-form-field appearance="outline">
-                    <input matInput class="form-input" formControlName="mobileNumber">
-                </mat-form-field>
+            <form [formGroup]="SignupForm" (ngSubmit)="Signup()" fxLayout="column"
+                fxLayoutAlign="space-between stretch">
+                <div class="fullName-container" fxLayout="column">
+                    <span>Full Name</span>
+                    <input type="text" class="form-input" formControlName="fullName">
+                </div>
+                <div class="email-container" fxLayout="column">
+                    <span>Email Id</span>
+                    <input type="text" class="form-input" formControlName="email">
+
+                </div>
+                <div class="password" fxLayout="column">
+                    <span>Password</span>
+                    <div style="border-color: black;border: 2px;">
+                        <input  class="form-input" formControlName="password"
+                            [type]="hide ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="phone-container" fxLayout="column">
+                    <span>Mobile Number</span>
+                    <input type="text" class="form-input" formControlName="mobileNumber">
+                </div>
+
                 <button class="signup-button">Signup</button>
+
             </form>
         </div>
     </div>

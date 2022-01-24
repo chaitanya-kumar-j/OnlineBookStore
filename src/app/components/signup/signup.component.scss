@@ -1,6 +1,6 @@
 img{
     border-radius: 4% 0% 0% 4%;
-    height : 450px;
+    height : 280px;
 }
 
 .right-container{
@@ -23,7 +23,7 @@ img{
     font-weight: bold;
 }
 
-label{
+span{
     font-size: 10px;
 }
 
@@ -33,9 +33,4 @@ label{
     border-radius: 5%;
     color:white;
     height: 25px;
-}
-
-mat-form-field{
-    font-size: 12px;
-    margin: none;
 }

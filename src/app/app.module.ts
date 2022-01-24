@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GetAllBooksComponent } from './components/get-all-books/get-all-books.component';
+import { DisplayBookComponent } from './components/display-book/display-book.component';
+import {MatCardModule} from '@angular/material/card';
+import { QuickViewComponent } from './components/quick-view/quick-view/quick-view.component';
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import { GetAllBooksComponent } from './components/get-all-books/get-all-books.c
     SignupComponent,
     LoginComponent,
     DashboardComponent,
-    GetAllBooksComponent
+    GetAllBooksComponent,
+    DisplayBookComponent,
+    QuickViewComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import { GetAllBooksComponent } from './components/get-all-books/get-all-books.c
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+.search-box{
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    opacity: 1;
+    height: 46px;
+    box-shadow: whitesmoke;
+    background-color: whitesmoke;
+  }
+
+  input{
+    outline: none !important;
+    outline-style: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    background-color: transparent !important;
+  }
+
+  img{
+    height: 24px;;
+    width: 24px;
+    opacity: .6;
+  }

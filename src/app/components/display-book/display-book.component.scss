@@ -1,0 +1,24 @@
+img{
+    height: 160px;
+    width: 140px;
+    margin-left: 16%;
+    padding-top:  20%;
+}
+
+mat-card{
+    width: 200px;
+    margin: 20px;
+}
+
+mat-card-content{
+    width: 250px;
+}
+
+.quick-view {
+    display: none;
+    margin-left: 30%;
+}
+  
+mat-card:hover .quick-view {
+    display: block;
+}
