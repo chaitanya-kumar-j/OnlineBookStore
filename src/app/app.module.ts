@@ -19,6 +19,7 @@ import { GetAllBooksComponent } from './components/get-all-books/get-all-books.c
 import { DisplayBookComponent } from './components/display-book/display-book.component';
 import {MatCardModule} from '@angular/material/card';
 import { QuickViewComponent } from './components/quick-view/quick-view/quick-view.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { QuickViewComponent } from './components/quick-view/quick-view/quick-vie
     DashboardComponent,
     GetAllBooksComponent,
     DisplayBookComponent,
-    QuickViewComponent
+    QuickViewComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

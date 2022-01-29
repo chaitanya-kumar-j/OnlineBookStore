@@ -16,10 +16,10 @@
     <div fxLayout="row wrap" style="margin-left:10%">
         <div *ngFor="let book of GetAllBooksArray">
             <mat-card class="example-card">
-                <img mat-card-image *ngIf="!(book.bookImage==null)" src={{book.bookImage}} >
-                <img mat-card-image *ngIf="book.bookImage==null" src="../../../assets/UserPagesImage.png" alt="">
+                <img mat-card-image *ngIf="!(book.bookImage==null)" src={{book.bookImage}} alt="../../../assets/BookImageMain.jpg">
+                <img mat-card-image *ngIf="book.bookImage==null" src="../../../assets/BookImageMain.jpg" alt="">
                 <button class="quick-view" style="background-color:black; color: white; opacity: 0.5; border: none;"
-                    routerLink="/home/{{book._id}}">Quick View</button>
+                    routerLink="/home/books/{{book._id}}">Quick View</button>
                 <mat-card-content>
                     <div style="font-weight: 500;">{{book.bookName}}</div>
                     <div style="font-weight:lighter; font-size: 12px;">by {{book.author}}</div>

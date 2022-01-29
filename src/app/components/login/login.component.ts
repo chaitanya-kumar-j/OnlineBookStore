@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
       this.userService.UserLogin(reqData).subscribe((response: any) => {
         console.log(response);
+          localStorage.setItem('token',response.result.accessToken)
           this.router.navigateByUrl('/home')
       }
       )

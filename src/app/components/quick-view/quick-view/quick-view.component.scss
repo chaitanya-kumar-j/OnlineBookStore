@@ -1,0 +1,59 @@
+.book-container{
+    margin-top: 5%;
+    margin-left: 10%;
+}
+.small-images-container img{
+    height: 30px;
+    width: 25px;
+}
+.small-images-container button :hover{
+    padding: 2%;
+    border: 1px solid rgb(180, 180, 180);
+}
+.full-image-container img{
+    height: 280px;
+    width: 200px;
+    padding: 10%;
+    border: 1px solid rgb(180, 180, 180);
+}
+
+.buttons-container img{
+    height: 20px;
+    width: 20px;
+    border: none;
+}
+span{
+    border: none;
+    color: white;
+}
+
+// .buttons-container button{
+//     height: 30px;
+//     font: 1em sans-serif;
+//     color: black;
+// }
+.details-container{
+    margin: 0% 7%;
+}
+
+.add-to-cart-button{
+    border: none; 
+    background-color: #a83434;
+    color: white;
+    margin-top: 5px;
+    height:30px;
+    width: 100px; 
+    margin-right: 40px;
+    border-radius: 2px;
+    padding: 0px 3px 3px 0px;
+}
+
+.wishlist-button{
+    border: none; 
+    color: white;
+    margin-top: 5px;
+    height:30px;
+    width: max-content; 
+    border-radius: 2px;
+    background-color: black;
+}

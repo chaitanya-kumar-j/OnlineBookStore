@@ -1,5 +1,5 @@
 <div fxLayout="column">
-    <div fxLayout="row" fxFlex=100 fxLayoutAlign="center center" style="background-color: #a83434;">
+    <div fxLayout="row" fxLayoutAlign="space-around center" style="background-color: #a83434;">
         <div>
             <button class="navMenu" mat-icon-button color="primary" routerLink="/home">
                 <img src="../../../assets/icons/logo.svg" alt=""
@@ -8,8 +8,8 @@
             </button>
         </div>
         <div>
-            <div class="search-box" fxHide.lt-md fxFlex="50" fxLayout="row" fxLayoutAlign="space-between center"
-                style="margin-left:5%">
+            <div class="search-box" fxLayout="row" fxLayoutAlign="space-between center"
+                style="min-width: 150%;" fxShow fxHide.lt-sm="true">
                 <button (click)="isShow=true" mat-icon-button>
                     <img src="../../../assets/icons/search.svg" alt="">
                 </button>
@@ -18,27 +18,32 @@
                     <img src="../../../assets/icons/close.svg" alt="">
                 </button>
             </div>
-            <div fxHide.gt-md >
+            
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <div fxHide fxShow.lt-sm="true" fxLayout="column" fxLayoutAlign="center center" >
                 <button (click)="isShow=true" mat-icon-button>
-                    <img src="../../../assets/icons/search.svg" alt="">
+                    <img src="../../../assets/icons/search_white.svg" alt="" style="opacity: 1;">
                 </button>
+                <span style="font-size: 12px; color:white">Search</span>
             </div>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="center center">
-            <button (click)="isShow=true" mat-icon-button color="primary">
-                <img src="../../../assets/icons/person_outline_white.svg" alt="" style="opacity: 1;">
-            </button>
-            <span style="font-size: 12px; color:white">Profile</span>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="center center">
-            <button (click)="isShow=true" mat-icon-button color="primary"><img src="../../../assets/icons/svg.svg"
-                    alt="" style="opacity: 1;"></button>
-            <span style="font-size: 12px; color:white">Cart</span>
+            <div fxLayout="column" fxLayoutAlign="center center" style="margin-left:5%">
+                <button mat-icon-button color="primary">
+                    <img src="../../../assets/icons/person_outline_white.svg" alt="" style="opacity: 1;">
+                </button>
+                <span style="font-size: 12px; color:white">Profile</span>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center" style="margin-left:20%">
+                <button mat-icon-button color="primary" routerLink="/home/cart"><img src="../../../assets/icons/svg.svg"
+                        alt="" style="opacity: 1;"></button>
+                <span style="font-size: 12px; color:white">Cart</span>
+            </div>
         </div>
 
     </div>
     <div>
         <app-get-all-books *ngIf="router.url=='/home/books'"></app-get-all-books>
-        <app-quick-view *ngIf="router.url=='/home/'"></app-quick-view>
+        <app-quick-view *ngIf="!(router.url=='/home/books' || router.url=='/home/cart')"></app-quick-view>
+        <app-cart *ngIf="router.url=='/home/cart'"></app-cart>
     </div>
 </div>

@@ -1,1 +1,59 @@
-<p>quick-view works!</p>
+<div fxLayout='row' fxLayout.lt-sm='column' fxFlex=100 class=book-container>
+    <div class=small-images-container fxLayout='column' fxLayoutAlign='start end'>
+        <button mat-button *ngIf="Book.bookImage!=null" (click)="ChangeImageUrl(Book.bookImage)">
+            <img src={{Book.bookImage}} alt="bookImage">
+        </button>
+        <button mat-button *ngIf="Book.bookImage ==null"
+            (click)="ChangeImageUrl('../../../../assets/BookImageMain.jpg')">
+            <img src="../../../../assets/BookImageMain.jpg" alt="bookImageMain">
+        </button>
+        <button mat-button *ngIf="Book.bookImage ==null"
+            (click)="ChangeImageUrl('../../../../assets/BookImageBack.jpg')">
+            <img src="../../../../assets/BookImageBack.jpg" alt="bookImageBack">
+        </button>
+    </div>
+    <div class="full-image-container">
+        <div>
+            <img src={{ChangedImageUrl}}>
+        </div>
+        <div class=buttons-container fxLayout='row' fxLayoutAlign='space-between start'>
+            <button mat-button *ngIf="!isAdded" class="add-to-cart-button" (click)="isAdded=true"
+                (click)="Increment()">ADD TO
+                BAG</button>
+            <button mat-button *ngIf="isAdded"><img src="../../../../assets/icons/remove_circle.svg" alt=""
+                    style="height:15px; width: 15px;opacity: 0.6;" (click)="Decrement()"></button>
+            <span *ngIf="isAdded" style="color:black;margin-top:4%">{{count}}</span>
+            <button mat-button *ngIf="isAdded"><img src="../../../../assets/icons/add_circle.svg" alt=""
+                    style="height:15px; width: 15px;opacity: 0.6;" (click)="Increment()"></button>
+            <button mat-button class="wishlist-button" (click)="AddToWishlist()">
+                <div fxLayout="row" fxLayoutAlign="start">
+                    WISHLIST
+                    <img src="../../../../assets/icons/favorite_white.svg">
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class='details-container' fxLayout='column' fxLayoutAlign='start start'>
+        <div style="font-weight: 500; font-size:x-large">{{Book.bookName}}</div>
+        <div style="font-weight:lighter; font-size: 12px; margin-top: 1%;">by {{Book.author}}</div>
+        <div fxLayout="row" style="margin-top:1%">
+            <div style="background-color:green; height: 20px;" fxLayoutAlign="start center">
+                <span style="color:white; margin-left: 5px;font-size:12px">4.5</span>
+                <mat-icon style="margin-bottom: 5px;">
+                    <img src="../../../assets/icons/star.svg" alt="" style="width:18px; height:18px;">
+                </mat-icon>
+            </div>
+        </div>
+        <div fxLayout='row' style="margin-top:3%">
+            <span style="font-weight:bold; color:black">Rs.{{Book.discountPrice}}</span>
+            <span
+                style="text-decoration: line-through;color: rgb(189, 184, 184); font-size: 10px; margin-left: 5px;">Rs.{{Book.price}}</span>
+        </div>
+        <hr style="width: 100%;">
+        <div>
+            <span style="color:gainsboro">Book Details</span>
+            <p style="text-align:justify">{{Book.description}}</p>
+        </div>
+        <hr style="width: 100%;">
+    </div>
+</div>

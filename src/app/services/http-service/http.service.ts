@@ -5,7 +5,8 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class HttpService {
-
+  
+  
   constructor(private httpClient:HttpClient) { }
 
   PostService(url:string,payload:any,token:boolean=false,httpOptions:any){
@@ -16,5 +17,15 @@ export class HttpService {
   GetService(url:string,token:boolean=false,httpOptions:any){
     console.log(url)
     return this.httpClient.get(url, token&&httpOptions)
+  }
+
+  PutService(url:string,payload:any,token:boolean=false,httpOptions:any) {
+    console.log(url,payload)
+    return this.httpClient.put(url, payload, httpOptions)
+  }
+
+  DeleteService(url:string,token:boolean=false,httpOptions:any) {
+    console.log(url)
+    return this.httpClient.delete(url, token&&httpOptions)
   }
 }
