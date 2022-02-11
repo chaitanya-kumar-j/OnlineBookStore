@@ -1,8 +1,8 @@
-<div fxLayout="column">
+<div fxLayout="column" *ngIf="!isFromCart">
     <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-left: 12%; margin-right:8%">
         <div fxLayout="row">
             <span style="font-size: medium; font-weight: bold;">Books</span>
-            <span style="font-size:10px; margin-top: 2px;margin-left: 5px;">({{GetAllBooksArray.length}} Items)</span>
+            <span style="font-size:10px; margin-top: 2px;margin-left: 5px;">({{GetAllBooksArray?.length}} Items)</span>
         </div>
         <div>
             <mat-form-field appearance="outline">
@@ -16,10 +16,11 @@
     <div fxLayout="row wrap" style="margin-left:10%">
         <div *ngFor="let book of GetAllBooksArray">
             <mat-card class="example-card">
-                <img mat-card-image *ngIf="!(book.bookImage==null)" src={{book.bookImage}} alt="../../../assets/BookImageMain.jpg">
-                <img mat-card-image *ngIf="book.bookImage==null" src="../../../assets/BookImageMain.jpg" alt="">
+                <img mat-card-image *ngIf="!(book?.bookImage==null)" src={{book?.bookImage}}
+                    alt="../../../assets/BookImageMain.jpg">
+                <img mat-card-image *ngIf="book?.bookImage==null" src="../../../assets/BookImageMain.jpg" alt="">
                 <button class="quick-view" style="background-color:black; color: white; opacity: 0.5; border: none;"
-                    routerLink="/home/books/{{book._id}}">Quick View</button>
+                    routerLink="/user/home/{{book._id}}">Quick View</button>
                 <mat-card-content>
                     <div style="font-weight: 500;">{{book.bookName}}</div>
                     <div style="font-weight:lighter; font-size: 12px;">by {{book.author}}</div>
@@ -36,11 +37,59 @@
                         <span
                             style="text-decoration: line-through;color: rgb(189, 184, 184); font-size: 10px; margin-left: 5px;">Rs.{{book.price}}</span>
                     </div>
-
                 </mat-card-content>
-                <mat-card-actions>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
+                    <button mat-button *ngIf="!isAdded" class="add-to-cart-button" (click)="isAdded=true"
+                        (click)="Increment()">ADD TO
+                        BAG</button>
+                    <button mat-button *ngIf="isAdded"><img src="../../../../assets/icons/remove_circle.svg" alt=""
+                            style="height:15px; width: 15px;opacity: 0.6;" (click)="Decrement()"></button>
+                    <span *ngIf="isAdded" style="color:black;margin-top:4%">{{count}}</span>
+                    <button mat-button *ngIf="isAdded"><img src="../../../../assets/icons/add_circle.svg" alt=""
+                            style="height:15px; width: 15px;opacity: 0.6;" (click)="Increment()"></button>
+                    <button mat-button class="wishlist-button" (click)="AddToWishlist()">
+                        <div fxLayout="row" fxLayoutAlign="start">
+                            WISHLIST
+                            <img src="../../../assets/icons/favorite_white.svg">
+                        </div>
+                    </button>
                 </mat-card-actions>
             </mat-card>
         </div>
+    </div>
+</div>
+
+<div fxLayout="column" *ngIf="isFromCart" fxLayoutAlign="center center">
+    <div class="order-image">
+        <img src="../../../assets/OrderPlacedImage.png" alt="OrderPlacedImage" style="height: 150px; width: 180px;">
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" style="margin-left: 10%;">
+        <p>Hurray!!! Your order is confirmed. Order id is 123456.</p>
+        <p>Save the order id for further communication.</p>
+        <p>Thanks for order.</p>
+    </div>
+    <div>
+        <table>
+            <tr style="background-color: whitesmoke; height: 40px; border:1px solid whitesmoke;">
+                <td>Email us</td>
+                <td>Contact us</td>
+                <td>Address</td>
+            </tr>
+            <tr>
+                <td>admin@bookstore.com</td>
+                <td>+91 9876543210</td>
+                <td>
+                    5/954, Sri ram nagar, proddatur,
+                    Kadapa, Andhra Pradesh - 516360.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <button
+            style="background-color:#3371B5; color: white; margin-top: 10%; height: 30px; border-radius: 2px; border: none;"
+            (click)="isFromCart = !isFromCart">
+            CONTINUE SHOPPING
+        </button>
     </div>
 </div>

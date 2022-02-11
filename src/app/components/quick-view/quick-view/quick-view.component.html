@@ -1,13 +1,13 @@
 <div fxLayout='row' fxLayout.lt-sm='column' fxFlex=100 class=book-container>
     <div class=small-images-container fxLayout='column' fxLayoutAlign='start end'>
-        <button mat-button *ngIf="Book.bookImage!=null" (click)="ChangeImageUrl(Book.bookImage)">
-            <img src={{Book.bookImage}} alt="bookImage">
+        <button mat-button *ngIf="Book?.bookImage!=null" (click)="ChangeImageUrl(Book?.bookImage)">
+            <img src={{Book?.bookImage}} alt="bookImage">
         </button>
-        <button mat-button *ngIf="Book.bookImage ==null"
+        <button mat-button *ngIf="Book?.bookImage ==null"
             (click)="ChangeImageUrl('../../../../assets/BookImageMain.jpg')">
             <img src="../../../../assets/BookImageMain.jpg" alt="bookImageMain">
         </button>
-        <button mat-button *ngIf="Book.bookImage ==null"
+        <button mat-button *ngIf="Book?.bookImage ==null"
             (click)="ChangeImageUrl('../../../../assets/BookImageBack.jpg')">
             <img src="../../../../assets/BookImageBack.jpg" alt="bookImageBack">
         </button>
@@ -34,8 +34,8 @@
         </div>
     </div>
     <div class='details-container' fxLayout='column' fxLayoutAlign='start start'>
-        <div style="font-weight: 500; font-size:x-large">{{Book.bookName}}</div>
-        <div style="font-weight:lighter; font-size: 12px; margin-top: 1%;">by {{Book.author}}</div>
+        <div style="font-weight: 500; font-size:x-large">{{Book?.bookName}}</div>
+        <div style="font-weight:lighter; font-size: 12px; margin-top: 1%;">by {{Book?.author}}</div>
         <div fxLayout="row" style="margin-top:1%">
             <div style="background-color:green; height: 20px;" fxLayoutAlign="start center">
                 <span style="color:white; margin-left: 5px;font-size:12px">4.5</span>
@@ -45,15 +45,54 @@
             </div>
         </div>
         <div fxLayout='row' style="margin-top:3%">
-            <span style="font-weight:bold; color:black">Rs.{{Book.discountPrice}}</span>
+            <span style="font-weight:bold; color:black">Rs.{{Book?.discountPrice}}</span>
             <span
-                style="text-decoration: line-through;color: rgb(189, 184, 184); font-size: 10px; margin-left: 5px;">Rs.{{Book.price}}</span>
+                style="text-decoration: line-through;color: rgb(189, 184, 184); font-size: 10px; margin-left: 5px;">Rs.{{Book?.price}}</span>
         </div>
         <hr style="width: 100%;">
         <div>
             <span style="color:gainsboro">Book Details</span>
-            <p style="text-align:justify">{{Book.description}}</p>
+            <p style="text-align:justify">{{Book?.description}}</p>
         </div>
         <hr style="width: 100%;">
+        <div class="feedback">
+            <h3>Customer Feedback</h3>
+            <mat-card style="width: 200%;">
+                <p>overall rating</p>
+                <div  fxLayout="row">
+                    <button *ngFor="let unStar of [1,2,3,4,5]; index as i" class="swap-on-hover" (click)="ShowNumber(unStar)" style="border: none; background-color: transparent;">
+                        <mat-icon style="color:gold" *ngIf="unStar<=clickedRating" class="gold-star">star</mat-icon>
+                        <mat-icon *ngIf="unStar > clickedRating" class="border-star">star_border</mat-icon>
+                    </button>
+                </div>
+                
+                <form [formGroup]="feedbackForm" fxLayout="column" (ngSubmit)="SubmitFeedback()">
+                    <mat-form-field class="example-full-width" appearance="outline" >
+                        <textarea matInput placeholder="Write your review" formControlName="feedback"></textarea>
+                      </mat-form-field>
+                    <button >Submit</button>
+                </form>
+            </mat-card>
+        </div>
+        <div *ngFor="let review of reviews" style="margin-top: 2%;">
+            <div fxLayout="row">
+                <div class="circle">{{review.user_id.fullName.split(" ")[0].substr(0,1) | titlecase}} {{review.user_id.fullName.split(" ")[1]?.substr(0,1) | titlecase}}</div>
+                <div fxLayout="column" style="padding-left: 2%;">
+                    <div><h3>{{review.user_id.fullName}}</h3></div>
+                    <div fxLayout="row">
+                        <div *ngFor='let loop3 of [].constructor(review.rating)' >
+                            <mat-icon style="color:gold" >star</mat-icon>
+                        </div>
+                        <div *ngFor='let loop3 of [].constructor(5-review.rating)'>
+                            <mat-icon >star_border</mat-icon>
+                        </div>
+                    </div>
+                    <div >
+                        <span style="color: gainsboro;">{{review.comment}}</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>

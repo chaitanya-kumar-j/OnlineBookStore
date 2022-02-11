@@ -22,3 +22,37 @@ mat-card-content{
 mat-card:hover .quick-view {
     display: block;
 }
+
+td{
+    width: 200px;
+    padding: 0% 1%;
+    text-align: center;
+}
+
+table{
+    border: 1px solid gainsboro;
+    
+}
+
+
+.add-to-cart-button{
+    border: none; 
+    background-color: #a83434;
+    color: white;
+    margin-top: 5px;
+    height:30px;
+    width: 90px; 
+    margin-right: 40px;
+    border-radius: 2px;
+    padding: 0px 3px 3px 0px;
+}
+
+.wishlist-button{
+    border: none; 
+    color: white;
+    margin-top: 5px;
+    height:30px;
+    width: 90px; 
+    border-radius: 2px;
+    background-color: black;
+}

@@ -6,7 +6,7 @@ import { HttpService } from '../http-service/http.service';
   providedIn: 'root'
 })
 export class CartService {
-    
+      
   token:any;
   baseUrl = 'https://bookstore.incubation.bridgelabz.com/';
   constructor(private httpService:HttpService) { }
@@ -55,5 +55,14 @@ export class CartService {
     return this.httpService.DeleteService(this.baseUrl+'bookstore_user/remove_cart_item/'+cartItemId,true, httpOptions);
   }
 
-  
+  PlaceOrder(reqData: { orders: any; }) {
+    this.token = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': this.token
+      })
+    }
+    return this.httpService.PostService(this.baseUrl+'bookstore_user/add/order', reqData,true, httpOptions);
+  }
 }

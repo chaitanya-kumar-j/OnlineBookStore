@@ -1,19 +1,161 @@
-<div class="main-container" fxLayout="column" fxLayoutAlign="start start">
-    <div class="cart-containrt">
-        <div>
+<div *ngIf="Cart?.length !== 0">
+    <div class="main-container" ngStyle.gt-xs="margin-right:30%" fxLayout="column" fxLayoutAlign="start start">
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
             <div>
-                <h4>My cart({{Cart.length}})</h4>
+                <h4>My cart({{Cart?.length}})</h4>
+            </div>
+            <div fxLayout="row" ngStyle.gt-sm="margin-left:150%" style="margin-left:20%">
+                <mat-form-field appearance="outline">
+                    <!-- <img src="../../../assets/icons/location_on_white.svg" alt="" style="color:tomato;"> -->
+                    <select matNativeControl name="car">
+                        <option value="" selected></option>
+    
+                    </select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="column">
+            <div *ngFor="let item of Cart" fxLayout="row" style="margin-top: 3%;">
+                <div>
+                    <img src="../../../assets/BookImageMain.jpg" alt="" style="height: 50px; width: 40px;">
+                </div>
+                <div>
+                    <div style="margin-left: 20%;">
+                        <div>{{item.product_id['bookName']}}</div>
+                        <div style="font-weight:lighter; font-size: 12px; margin-top: 1%;">by
+                            {{item.product_id['author']}}
+                        </div>
+    
+                        <div fxLayout='row' style="margin-top:3%">
+                            <span style="font-weight:bold; color:black">
+                                Rs.{{item.product_id['discountPrice']}}
+                            </span>
+                            <span style="text-decoration: line-through; color: rgb(189, 184, 184);  
+                                font-size: 10px; margin-left: 5px;">
+                                Rs.{{item.product_id['price']}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="buttons-container">
+                        <button mat-button>
+                            <img src="../../../../assets/icons/remove_circle.svg" alt=""
+                                style="height:15px; width: 15px;opacity: 0.6;"
+                                (click)="UpdateCart(item._id,item.quantityToBuy-1)">
+                        </button>
+                        <span style="color:black;margin-top:4%">
+                            {{item.quantityToBuy}}
+                        </span>
+                        <button mat-button>
+                            <img src="../../../../assets/icons/add_circle.svg" alt=""
+                                style="height:15px; width: 15px;opacity: 0.6;"
+                                (click)="UpdateCart(item._id,item.quantityToBuy+1)">
+                        </button>
+                        <button mat-button (click)="Delete(item._id)">Remove</button>
+                    </div>
+                </div>
             </div>
             <div>
-                
+                <button mat-button *ngIf="!isClickedPlaceOrder" (click)="isClickedPlaceOrder=!isClickedPlaceOrder"
+                    ngStyle.gt-sm="margin-left: 200%" style="background-color:#3371B5; color: white; margin-left: 20%;">
+                    PLACE ORDER
+                </button>
             </div>
-
+        </div>
+    
+    </div>
+    <div class="main-container" ngStyle.gt-xs="margin-right:30%" fxLayout="column" fxLayoutAlign="start start">
+        <h4>Address Details</h4>
+        <form [formGroup]="addressForm" *ngIf="isClickedPlaceOrder">
+            <div fxLayout="row" fxLayout.lt-sm="column">
+                <div fxLayout="column">
+                    <span>Full Name</span>
+                    <input formControlName="fullName">
+                </div>
+                <div fxLayout="column" ngStyle.gt-xs="margin-left: 2%;">
+                    <span>Mobile Number</span>
+                    <input formControlName="mobileNumber">
+                </div>
+            </div>
+            <div>
+                <label *ngFor="let address of addressTypes">
+                    <div>
+                      <input
+                        type="radio"
+                        name="options"
+                        (click)="addressType = address"
+                        [checked]="address === addressType"
+                      />{{ address }}
+                    </div>
+                    <div *ngIf="address === addressType">
+                        <div fxLayout="column">
+                            <span>Address</span>
+                            <textarea formControlName="fullAddress" [placeholder]="userAddress.fullAddress"></textarea>
+                        </div>
+                        <div fxLayout="row" fxLayout.lt-sm="column">
+                            <div fxLayout="column">
+                                <span>City/Town</span>
+                                <input formControlName="cityOrTownName" [placeholder]="userAddress.city">
+                            </div>
+                            <div fxLayout="column" ngStyle.gt-xs="margin-left: 2%;">
+                                <span>State</span>
+                                <input formControlName="stateName" [placeholder]="userAddress.state">
+                            </div>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            <div>
+                <button mat-button ngStyle.gt-sm="margin-left: 180%"
+                    style="background-color:#3371B5; color: white; margin-left: 20%;" (click)="isUpdatedAddress=!isUpdatedAddress" (click)="UpdateAddress()" *ngIf="!isUpdatedAddress">
+                    CONTINUE
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="main-container" ngStyle.gt-xs="margin-right:30%" fxLayout="column" fxLayoutAlign="start start">
+        <h4>Order Summary</h4>
+        <div fxLayout="column" *ngIf="isUpdatedAddress">
+            <div *ngFor="let item of Cart" fxLayout="row" style="margin-top: 3%;">
+                <div>
+                    <img src="../../../assets/BookImageMain.jpg" alt="" style="height: 50px; width: 40px;">
+                </div>
+                <div>
+                    <div style="margin-left: 20%;">
+                        <div>{{item.product_id['bookName']}}</div>
+                        <div style="font-weight:lighter; font-size: 12px; margin-top: 1%;">by
+                            {{item.product_id['author']}}
+                        </div>
+    
+                        <div fxLayout='row' style="margin-top:3%">
+                            <span style="font-weight:bold; color:black">
+                                Rs.{{item.product_id['discountPrice']}}
+                            </span>
+                            <span style="text-decoration: line-through; color: rgb(189, 184, 184);  
+                                font-size: 10px; margin-left: 5px;">
+                                Rs.{{item.product_id['price']}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button mat-button 
+                    ngStyle.gt-sm="margin-left: 200%" style="background-color:#3371B5; color: white; margin-left: 20%;" (click)="PlaceOrder()">
+                    CHECKOUT
+                </button>
+            </div>
         </div>
     </div>
-    <div class="user-details-container">
+</div>
 
+<div *ngIf="Cart?.length ===0" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayoutAlign="center center">
+        <img src="../../../assets/empty-cart.png" alt="empty-cart" 
+        style="height: 300px; width: 350px;">
     </div>
-    <div class="order-container">
-
+    <div>
+        <button style="background-color:#3371B5; color: white; height: 30px; border-radius: 2px; border: none;" routerLink="/user">
+            CONTINUE SHOPPING
+        </button>
     </div>
 </div>

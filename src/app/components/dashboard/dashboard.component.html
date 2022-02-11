@@ -1,15 +1,16 @@
 <div fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="space-around center" style="background-color: #a83434;">
+    <div fxLayout="row" fxLayoutAlign="space-around center" style="background-color: #a83434;
+    height: 70px">
         <div>
-            <button class="navMenu" mat-icon-button color="primary" routerLink="/home">
+            <button class="navMenu" mat-icon-button color="primary" routerLink="/user/home">
                 <img src="../../../assets/icons/logo.svg" alt=""
                     style="margin-left: 50%; height: 30px; width: 30px; opacity: 1;">
                 <label style="color:white; margin-left: 20%;">Book Store</label>
             </button>
         </div>
         <div>
-            <div class="search-box" fxLayout="row" fxLayoutAlign="space-between center"
-                style="min-width: 150%;" fxShow fxHide.lt-sm="true">
+            <div class="search-box" fxLayout="row" fxLayoutAlign="space-between center" style="min-width: 180%;" fxShow
+                fxHide.lt-sm="true">
                 <button (click)="isShow=true" mat-icon-button>
                     <img src="../../../assets/icons/search.svg" alt="">
                 </button>
@@ -18,32 +19,45 @@
                     <img src="../../../assets/icons/close.svg" alt="">
                 </button>
             </div>
-            
+
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between center" >
-            <div fxHide fxShow.lt-sm="true" fxLayout="column" fxLayoutAlign="center center" >
-                <button (click)="isShow=true" mat-icon-button>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxHide fxShow.lt-sm="true" fxLayout="column" fxLayoutAlign="center center">
+                <!-- <button (click)="isShow=true" mat-icon-button>
                     <img src="../../../assets/icons/search_white.svg" alt="" style="opacity: 1;">
-                </button>
+                </button> -->
+                <mat-icon style="color:white">search</mat-icon>
                 <span style="font-size: 12px; color:white">Search</span>
             </div>
             <div fxLayout="column" fxLayoutAlign="center center" style="margin-left:5%">
-                <button mat-icon-button color="primary">
+                <!-- <button mat-icon-button color="primary">
                     <img src="../../../assets/icons/person_outline_white.svg" alt="" style="opacity: 1;">
-                </button>
+                </button> -->
+                <mat-icon style="color:white" [matMenuTriggerFor]="menu">
+                    person_outline
+                </mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Profile</button>
+                    <button mat-menu-item routerLink="/user/wishlist">Wishlist</button>
+                    <button mat-menu-item>Logout</button>
+                </mat-menu>
                 <span style="font-size: 12px; color:white">Profile</span>
             </div>
-            <div fxLayout="column" fxLayoutAlign="center center" style="margin-left:20%">
-                <button mat-icon-button color="primary" routerLink="/home/cart"><img src="../../../assets/icons/svg.svg"
-                        alt="" style="opacity: 1;"></button>
+            <div fxLayout="column" fxLayoutAlign="center center" style="margin-left:20%;">
+                <!-- <button mat-icon-button  color="primary" routerLink="/user/cart"> -->
+                <!-- <span class="material-icons-outlined" matBadge="2" matBadgeSize="small" matBadgeOverlap="true" >
+                        shopping_cart
+                        </span> -->
+                <mat-icon *ngIf="Cart?.length>0" routerLink="/user/cart" matBadge={{Cart?.length}} style="color:white">
+                    shopping_cart</mat-icon>
+                <mat-icon *ngIf="Cart?.length===0" routerLink="/user/cart" style="color:white">shopping_cart</mat-icon>
+                <!-- </button> -->
                 <span style="font-size: 12px; color:white">Cart</span>
             </div>
         </div>
 
     </div>
     <div>
-        <app-get-all-books *ngIf="router.url=='/home/books'"></app-get-all-books>
-        <app-quick-view *ngIf="!(router.url=='/home/books' || router.url=='/home/cart')"></app-quick-view>
-        <app-cart *ngIf="router.url=='/home/cart'"></app-cart>
+        <router-outlet></router-outlet>
     </div>
 </div>

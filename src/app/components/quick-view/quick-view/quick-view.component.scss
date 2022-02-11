@@ -57,3 +57,46 @@ span{
     border-radius: 2px;
     background-color: black;
 }
+
+form button{
+    border: none; 
+    color: white;
+    margin-top: 5px;
+    height:30px;
+    width: max-content; 
+    border-radius: 2px;
+    background-color: #3371B5;
+    margin-left: 80%;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    font-size: 10px;
+    color: rgb(224, 222, 222);
+    text-align: center;
+    background: transparent;
+    border: 1px solid gainsboro;
+  }
+
+
+// .swap-on-hover .border-star {
+//     z-index: 9999;
+//     transition: opacity .5s linear;
+//     cursor: pointer;
+//   }
+
+//   .swap-on-hover:hover > .border-star{
+//     opacity: 0;
+//   }
+
+//   .gold-star{
+//       display: none;
+//   }
+
+//   .swap-on-hover:hover > .gold-star{
+//     display: block;
+//   }
+

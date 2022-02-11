@@ -34,9 +34,18 @@ span{
     border-radius: 5%;
     color:white;
     height: 25px;
+    margin-top: 10%;
 }
 
 hr{
     width: 30%;
     margin: 5%;
+}
+
+.form-input{
+    border: 0 none transparent;
+}
+
+.form-input:focus{
+    outline: none;
 }

@@ -1,4 +1,4 @@
-<div class="main-container" fxFlex=100 fxLayout="row" fxLayoutAlign="center center" style="margin-top:10%">
+<div *ngIf="!isFromAdmin"  class="main-container" fxFlex=100 fxLayout="row" fxLayoutAlign="center center" style="margin-top:10%">
     <div>
         <img src="../../../assets/UserPagesImage.png" alt="UserPagesImage">
     </div>
@@ -26,12 +26,71 @@
                 </div>
                 <div class="password" fxLayout="column">
                     <span>Password</span>
-                    <div style="border-color: black;border: 2px;">
-                        <input  class="form-input" formControlName="password"
-                            [type]="hide ? 'password' : 'text'">
+                    <div style="border: 1px solid lightslategray; border-radius:2px;">
+                        <input  class="password-input" formControlName="password"
+                            [type]="hide ? 'password' : 'text'" style="border:none;">
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                             [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="phone-container" fxLayout="column">
+                    <span>Mobile Number</span>
+                    <input type="text" class="form-input" formControlName="mobileNumber">
+                </div>
+
+                <button class="signup-button">Signup</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isFromAdmin" class="main-container" fxFlex=100 fxLayout="row" fxLayoutAlign="center center" style="margin-top:10%">
+    <div>
+        <img src="../../../assets/UserPagesImage.png" alt="UserPagesImage">
+    </div>
+    <div class="right-container">
+        <div fxLayout="row" fxLayoutAlign="space-between start" *ngIf="!isFromAdmin">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button routerLink="/login" class="login-logout">LOGIN</button>
+                <hr class="activated">
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button routerLink="/signup" class="login-logout" style="margin-bottom: 30%;">SIGNUP</button>
+
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between start" *ngIf="isFromAdmin">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button routerLink="/login" class="login-logout">ADMIN LOGIN</button>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button routerLink="/signup" class="login-logout">ADMIN SIGNUP</button>
+                <hr class="activated">
+            </div>
+        </div>
+        <div>
+            <form [formGroup]="SignupForm" (ngSubmit)="Signup()" fxLayout="column"
+                fxLayoutAlign="space-between stretch">
+                <div class="fullName-container" fxLayout="column">
+                    <span>Full Name</span>
+                    <input type="text" class="form-input" formControlName="fullName">
+                </div>
+                <div class="email-container" fxLayout="column">
+                    <span>Email Id</span>
+                    <input type="text" class="form-input" formControlName="email">
+
+                </div>
+                <div class="password" fxLayout="column">
+                    <span>Password</span>
+                    <div style="border: 1px solid lightslategray; border-radius:2px;">
+                        <input  class="password-input" formControlName="password"
+                            [type]="hide ? 'password' : 'text'" style="border:none;">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </div>
                 </div>

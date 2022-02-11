@@ -20,6 +20,14 @@ import { DisplayBookComponent } from './components/display-book/display-book.com
 import {MatCardModule} from '@angular/material/card';
 import { QuickViewComponent } from './components/quick-view/quick-view/quick-view.component';
 import { CartComponent } from './components/cart/cart.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+import { AddOrUpdateComponent } from './components/add-or-update/add-or-update.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -31,7 +39,9 @@ import { CartComponent } from './components/cart/cart.component';
     GetAllBooksComponent,
     DisplayBookComponent,
     QuickViewComponent,
-    CartComponent
+    CartComponent,
+    AdminDashboardComponent,
+    AddOrUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +54,12 @@ import { CartComponent } from './components/cart/cart.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule,
+    MatBadgeModule,
+    MatMenuModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,60 @@
+<div class="main-container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="header-container" fxFlex=100>
+        <h2 *ngIf="data.isAddBook">ADD NEW BOOK</h2>
+        <h2 *ngIf="!data.isAddBook">UPDATE BOOK</h2>
+    </div>
+
+    <div class="form-container" fxFlex=100>
+        <form [formGroup]="AddOrUpdateForm" (ngSubmit)="AddOrUpdate()" fxLayout="column"
+            fxLayoutAlign="space-between stretch">
+            <div fxLayout="row" fxLayoutAlign="space-between stretch">
+                <div fxLayout="column" fxLayoutAlign="space-between stretch">
+                    <label>Title</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Enter book title..." formControlName="title">
+                    </mat-form-field>
+                    <label>Author</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Enter author name..." formControlName="author">
+                    </mat-form-field>
+                    <label>Image Url</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Enter book image url..." formControlName="imageUrl">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="space-between stretch" style="margin-left: 3%">
+                    <label>Actual Price</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Enter actual price of book..." formControlName="actualPrice">
+                    </mat-form-field>
+                    <label>Discount Price</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Enter discount price of book..." formControlName="discountPrice">
+                    </mat-form-field>
+                    <label>Stock Available</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Enter number of books in stock..." formControlName="stock">
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-between stretch">
+                <label>Description</label>
+                <mat-form-field appearance="outline">
+                    <textarea matInput placeholder="Write something about book..."
+                        formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <button *ngIf="data?.isAddBook"
+                    style="background-color:#3371B5; color: white; height: 30px; border-radius: 2px; border: none;" >
+                    ADD BOOK
+                </button>
+                <button *ngIf="!data?.isAddBook"
+                    style="background-color:#3371B5; color: white; height: 30px; border-radius: 2px; border: none;">
+                    UPDATE BOOK
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

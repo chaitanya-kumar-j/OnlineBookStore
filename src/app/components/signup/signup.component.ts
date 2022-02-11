@@ -2,6 +2,9 @@ import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user-service/user.service';
+import { Subscription } from 'rxjs';
+import { DataShareService } from '../../services/data-share-service/data-share.service';
+import { AdminService } from '../../services/admin-service/admin.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,12 +16,22 @@ import { UserService } from '../../services/user-service/user.service';
 export class SignupComponent implements OnInit, AfterViewInit {
 
   SignupForm!: FormGroup;
+  isFromAdminSubscription!:Subscription;
+  isFromAdmin:any;
   
   hide:boolean = true;
-  constructor(private elementRef: ElementRef, private route: Router, private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(
+    private elementRef: ElementRef, 
+    private route: Router, 
+    private formBuilder: FormBuilder, 
+    private userService: UserService,
+    private dataShareService: DataShareService,
+    private adminService:AdminService,
+    ) { }
 
   ngOnInit(): void {
-
+    this.isFromAdminSubscription = this.dataShareService.isFromAdmin.subscribe((data)=> this.isFromAdmin = data)
+    console.log(this.isFromAdmin)
     this.SignupForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -43,10 +56,18 @@ export class SignupComponent implements OnInit, AfterViewInit {
         phone: this.SignupForm.value.mobileNumber,
         service: this.SignupForm.value.service
       }
-      this.userService.UserSignup(reqData).subscribe((response: any) => {
-        console.log(response);
+      if (this.isFromAdmin){
+        this.adminService.AdminSignup(reqData).subscribe((response: any) => {
+          console.log(response);
+        }
+        )
       }
-      )
+      else{
+        this.userService.UserSignup(reqData).subscribe((response: any) => {
+          console.log(response);
+        }
+        )
+      }
     }
   }
 }
