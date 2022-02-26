@@ -11,17 +11,17 @@ import { AdminService } from 'src/app/services/admin-service/admin.service';
 })
 export class AddOrUpdateComponent implements OnInit {
 
-  AddOrUpdateForm!:FormGroup;
+  AddOrUpdateForm!: FormGroup;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     private router: Router
-    ) {
-      if(data?.Book != null){
-        console.log(data?.Book['Title'])
-      }
-   }
+  ) {
+    if (data?.Book != null) {
+      console.log(data?.Book['Title'])
+    }
+  }
 
   ngOnInit(): void {
     this.AddOrUpdateForm = this.formBuilder.group({
@@ -33,9 +33,21 @@ export class AddOrUpdateComponent implements OnInit {
       stock: ['', [Validators.required]],
       description: ['', [Validators.required]],
     });
+
+    if (this.data?.Book != null) {
+      this.AddOrUpdateForm.patchValue({
+        title: this.data?.Book['Title'],
+        author: this.data?.Book['Author'],
+        imageUrl: this.data?.Book['BookImage'],
+        description: this.data?.Book['Description'],
+        discountPrice: this.data?.Book['DiscountPrice'],
+        actualPrice: this.data?.Book['Price'],
+        stock: this.data?.Book['Stock']
+      })
+    }
   }
 
-  AddOrUpdate(){
+  AddOrUpdate() {
     if (this.AddOrUpdateForm.valid) {
       console.log(this.AddOrUpdateForm.value)
       let reqData = {
@@ -43,24 +55,28 @@ export class AddOrUpdateComponent implements OnInit {
         author: this.AddOrUpdateForm.value.author,
         description: this.AddOrUpdateForm.value.description,
         quantity: this.AddOrUpdateForm.value.stock,
-        price: this.AddOrUpdateForm.value.actualPrice,
-        discountPrice: this.AddOrUpdateForm.value.discountPrice,
+        price: parseInt(this.AddOrUpdateForm.value.actualPrice),
+        discountPrice: parseInt(this.AddOrUpdateForm.value.discountPrice),
       }
-      if(this.data.isAddBook){
+      if (this.data.isAddBook) {
+        console.log(reqData);
         this.adminService.AddBook(reqData).subscribe((response: any) => {
           console.log(response);
-            localStorage.setItem('token',response.result.accessToken)
+          this.router.navigateByUrl('/').then(() => {
             this.router.navigateByUrl('/admin')
+          });
         })
       }
-      else{
-        this.adminService.UpdateBook(this.data.Book["_id"],reqData).subscribe((response: any) => {
+      else {
+        console.log(this.data.Book)
+        this.adminService.UpdateBook(this.data.Book["id"], reqData).subscribe((response: any) => {
           console.log(response);
-            localStorage.setItem('token',response.result.accessToken)
+          this.router.navigateByUrl('/').then(() => {
             this.router.navigateByUrl('/admin')
+          });
         })
       }
-    }    
+    }
   }
 
 }

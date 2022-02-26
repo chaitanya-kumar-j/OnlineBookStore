@@ -14,19 +14,23 @@ export class DisplayBookComponent implements OnInit {
   count:any;
   @Input() GetAllBooksArray:any;
   isFromCart: any;
-
+  searchTextSubscription!:Subscription;
+  searchText:any;
+  filterMetadata = { count: 0 };
   constructor(private dataShareService: DataShareService) { }
 
   ngOnInit(): void {
 
     this.isFromCartSubscription = this.dataShareService.isFromCart?.subscribe((data: any) => this.isFromCart = data)
-
-    console.log(this.GetAllBooksArray)
+    this.searchTextSubscription = this.dataShareService.searchText.subscribe(text => this.searchText = text)
+    // this.filterMetadata.count = this.GetAllBooksArray?.length;
+    console.log(this.GetAllBooksArray, this.searchText)
   }
 
-  // ngOnDestroy() {
-  //   this.isFromCartSubscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.isFromCartSubscription.unsubscribe();
+    this.searchTextSubscription.unsubscribe();
+  }
 
   Decrement(){
 

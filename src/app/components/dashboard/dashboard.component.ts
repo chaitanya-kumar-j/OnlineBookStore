@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   Cart: any;
   isShow:boolean=false;
   cartSubscription!: Subscription;
+  searchTextSubscription!:Subscription;
+  searchText:any;
 
   constructor(
     public router:Router,
@@ -26,22 +28,33 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.GetCart();
     this.cartSubscription = this.dataShareService.Cart.subscribe(cart => this.Cart = cart)
+    this.searchTextSubscription = this.dataShareService.searchText.subscribe(text => this.searchText = text)
   }
 
   ngOnDestroy() {
     this.cartSubscription.unsubscribe();
+    this.searchTextSubscription.unsubscribe();
   }
 
   GetCart() {
     this.cartService.GetAllCartItems().subscribe((res: any) => {
       console.log(res);
       this.Cart = res.result;
-      console.log(this.Cart);
+      console.log(this.Cart, this.searchText);
       this.dataShareService.changeCart(this.Cart)
     }, err => {
       console.log(err.message);
     })
   }
 
+  Logout(){
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/user/home')
+  }
 
+  ChangeSearchString(value:any){
+    
+    console.log(value)
+    this.dataShareService.getSearchText(value)
+  }
 }

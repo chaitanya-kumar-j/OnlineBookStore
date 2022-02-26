@@ -27,6 +27,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import { AddOrUpdateComponent } from './components/add-or-update/add-or-update.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 
@@ -41,7 +42,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     QuickViewComponent,
     CartComponent,
     AdminDashboardComponent,
-    AddOrUpdateComponent
+    AddOrUpdateComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

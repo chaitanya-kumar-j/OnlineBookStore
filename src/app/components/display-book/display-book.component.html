@@ -2,7 +2,7 @@
     <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-left: 12%; margin-right:8%">
         <div fxLayout="row">
             <span style="font-size: medium; font-weight: bold;">Books</span>
-            <span style="font-size:10px; margin-top: 2px;margin-left: 5px;">({{GetAllBooksArray?.length}} Items)</span>
+            <span style="font-size:10px; margin-top: 2px;margin-left: 5px;">({{filterMetadata.count}} Items)</span>
         </div>
         <div>
             <mat-form-field appearance="outline">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div fxLayout="row wrap" style="margin-left:10%">
-        <div *ngFor="let book of GetAllBooksArray">
+        <div *ngFor="let book of GetAllBooksArray | filter:searchText:filterMetadata">
             <mat-card class="example-card">
                 <img mat-card-image *ngIf="!(book?.bookImage==null)" src={{book?.bookImage}}
                     alt="../../../assets/BookImageMain.jpg">

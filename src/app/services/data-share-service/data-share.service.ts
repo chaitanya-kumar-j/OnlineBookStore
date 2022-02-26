@@ -24,10 +24,13 @@ export class DataShareService {
  
   private isFromCartSource = new BehaviorSubject(false);
   private isFromAdminSource = new BehaviorSubject(false);
+  private searchTextSource = new BehaviorSubject("");
 
   Cart = this.cartSource.asObservable();
   isFromCart = this.isFromCartSource.asObservable();
   isFromAdmin = this.isFromAdminSource.asObservable();
+  searchText = this.searchTextSource.asObservable();
+
   constructor() { }
 
   changeCart(Cart: any) {
@@ -40,5 +43,9 @@ export class DataShareService {
 
   changeIsFromAdmin(value:boolean){
     this.isFromAdminSource.next(value);
+  }
+
+  getSearchText(value:any){
+    this.searchTextSource.next(value)
   }
 }

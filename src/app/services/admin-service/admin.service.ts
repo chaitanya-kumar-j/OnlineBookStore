@@ -6,6 +6,7 @@ import { HttpService } from '../http-service/http.service';
   providedIn: 'root'
 })
 export class AdminService {
+  
       
   baseUrl = 'https://bookstore.incubation.bridgelabz.com/';
   token: any;
@@ -43,22 +44,38 @@ export class AdminService {
   }
 
   AddBook(reqData: any) {
+    this.token = localStorage.getItem('token');
     let httpOptions={
       headers: new HttpHeaders ({
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'x-access-token': this.token
         })
     }
     console.log(reqData)
-    return this.httpService.PostService(this.baseUrl+'bookstore_user/admin/add/book',reqData,false,httpOptions)
+    return this.httpService.PostService(this.baseUrl+'bookstore_user/admin/add/book',reqData,true,httpOptions)
   }
 
   UpdateBook(bookId:any,reqData: any) {
+    this.token = localStorage.getItem('token');
     let httpOptions={
       headers: new HttpHeaders ({
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'x-access-token': this.token
         })
     }
-    console.log(reqData)
-    return this.httpService.PutService(this.baseUrl+'bookstore_user/admin/book/'+bookId,reqData,false,httpOptions)
+    console.log(bookId,reqData)
+    return this.httpService.PutService(this.baseUrl+'bookstore_user/admin/update/book/'+bookId,reqData,true,httpOptions)
+  }
+
+  DeleteBook(book: any) {
+    this.token = localStorage.getItem('token');
+    let httpOptions={
+      headers: new HttpHeaders ({
+        'Content-Type':'application/json',
+        'x-access-token': this.token
+        })
+    }
+    console.log(book.id)
+    return this.httpService.DeleteService(this.baseUrl+'bookstore_user/admin/delete/book/'+book.id,true,httpOptions)
   }
 }

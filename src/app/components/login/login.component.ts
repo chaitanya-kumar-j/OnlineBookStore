@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
 
   LoginForm!:FormGroup;
   hide:boolean=true;
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument
-      .body.style.backgroundColor = '#b0acac';
-  }
+  // ngAfterViewInit() {
+  //   this.elementRef.nativeElement.ownerDocument
+  //     .body.style.backgroundColor = '#b0acac';
+  // }
 
   ChangeToAdmin(){
     this.dataShareService.changeIsFromAdmin(true);
